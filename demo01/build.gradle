@@ -1,0 +1,131 @@
+import java.text.SimpleDateFormat
+
+
+group 'net.msonic'
+version '1.0-SNAPSHOT'
+
+SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd")
+format.setTimeZone(TimeZone.getTimeZone("UTC-5"))
+
+println 'Hello word:' + format.format(new Date())
+
+
+//inline code
+
+void sayHello(){
+    println "Hello world 2"
+}
+sayHello()
+
+println doubleIt(5);
+
+Integer doubleIt(Integer i){
+    i * 2;
+    Integer x = 4;
+}
+
+
+def s1="a String"
+println(s1)
+def s2='a String'
+println(s2)
+def s3="""
+demo de clientes
+demoe
+
+s
+s
+s
+"""
+println(s3)
+
+def x=4
+println("x is $x")
+
+def myCourse="grovy"
+println "I'm training in: ${myCourse.toUpperCase()}"
+
+
+class Person{
+    String name
+    Integer age
+
+    Person(String name,Integer age){
+        this.name=name
+        this.age=age
+    }
+}
+
+def d1 = new Person("Manuel",36)
+println "Name:${d1.name}"
+
+
+Closure echoIt = { parameterA,parameterB ->
+    println "$parameterA,$parameterB"
+}
+
+echoIt("demo closures","ssss")
+
+def oneArgMethod(closure){
+    closure() * 2
+}
+
+println(oneArgMethod({3}))
+
+def twoArgMethod(factor,closure){
+    closure() * factor
+}
+
+println(twoArgMethod(4,{3}))
+
+
+def i = oneArgMethod {
+    def y = 3
+    y * 2
+}
+
+assert i == 12
+
+
+[1,3,4,5].each {
+    println it
+}
+
+
+
+def theName = "Jhon"
+
+def sayName = {
+
+    println theName
+}
+
+sayName()
+
+theName = "Bill"
+
+
+sayName()
+
+
+
+
+class PersonDemo{
+    String theName
+    Integer age
+
+    PersonDemo(String theName,Integer age){
+        this.theName=theName
+        this.age=age
+    }
+
+    def executeInside(Closure c){
+        c.delegate=this
+        c()
+    }
+}
+
+println('========')
+def p1 = new PersonDemo("Nicole",4)
+p1.executeInside {println theName}
+println('========')
