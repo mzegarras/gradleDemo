@@ -1,15 +1,17 @@
-plugins {
-    id 'groovy'
-}
+/*
+logger.info("demo logger")
 
-group 'net.msonic'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+apply {
+    println( "demo 2")
 }
+*/
 
-dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
+//Lifecycle Phases
+
+//1.- Initialization
+    //init.gradle + other.gradle
+    //settings.gradle
+//2.- Configuration
+    //Each project needs build.gradle
+//3.- Execution
+    // Execute build.gradle

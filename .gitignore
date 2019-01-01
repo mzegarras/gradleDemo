@@ -3,6 +3,7 @@ gradlew*
 .gradle
 /build/
 /gradle/**
+/gradle/wapper/**
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -12,8 +13,6 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
-
-
 
 
 
