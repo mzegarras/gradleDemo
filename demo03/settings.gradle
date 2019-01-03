@@ -1,0 +1,3 @@
+println "settings.gradle --> this execute during the initialization phase"
+rootProject.name = 'demo03'
+
