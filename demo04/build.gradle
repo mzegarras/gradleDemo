@@ -2,10 +2,14 @@ plugins {
     id 'groovy'
 }
 
+
+
+
+
 group 'net.msonic'
 version '1.0-SNAPSHOT'
 
-println ">>> build.gradle --> This is executed during the configuration phase  - timestamp"
+println ">>> build.gradle --> This is executed during the configuration phase  - timestamp ${gradle.timestamp()}"
 
 
 logger.info ">>> build.gradle: $gradle.gradleVersion"
@@ -44,7 +48,7 @@ logger.info "has property: ${project.hasProperty('gradlePropertiesProp')}"
 
 
 
-if( project.hasProperty('gradlePropertiesProp') ) {
+if( hasProperty('gradlePropertiesProp') ) {
     logger.info "The property file value is $gradlePropertiesProp"
 }else{
     logger.info "Oops! gradlePropertiesProp can't be found"
@@ -52,12 +56,27 @@ if( project.hasProperty('gradlePropertiesProp') ) {
 
 
 
-if( project.hasProperty('commandLineProjectProp') ) {
+if( hasProperty('commandLineProjectProp') ) {
     logger.info "The property file value is $commandLineProjectProp"
 }else{
     logger.info "Oops! commandLineProjectProp can't be found"
 }
 
+project.ext.set("prop1","******")
+
+project.ext {
+    prop2 = "***********"
+}
+
+if(hasProperty("prop1")){
+    logger.info project.prop1
+}
+
+if(hasProperty("prop2")){
+    logger.info project.prop2
+}
+assert project.prop1 == "******"
+assert project.prop2 == "***********"
 
 project.ext.sayHello = "Hello!"
 if( project.hasProperty('sayHello') ) {
@@ -65,6 +84,9 @@ if( project.hasProperty('sayHello') ) {
 }else{
     logger.info "Unable to say Hello!"
 }
+
+
+
 
 if( project.gradle.hasProperty('timestamp') ) {
     logger.info project.gradle.timestamp()
