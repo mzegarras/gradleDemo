@@ -1,3 +1,6 @@
+
+group 'net.msonic'
+version '1.0-SNAPSHOT'
 /*
 logger.info("demo logger")
 

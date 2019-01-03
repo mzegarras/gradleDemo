@@ -1,8 +1,9 @@
 
+.idea
 gradlew*
 .gradle
 /build/
-/gradle/**
+*/gradle/**
 /gradle/wapper/**
 
 # Ignore Gradle GUI config
