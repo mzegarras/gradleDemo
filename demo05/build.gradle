@@ -1,6 +1,4 @@
-plugins {
-    id 'groovy'
-}
+defaultTasks 'hello','hi','hello2'
 
 group 'net.msonic'
 version '1.0-SNAPSHOT'
@@ -18,11 +16,54 @@ dependencies {
 task hi
 
 project.hi.doLast{
-    println '************+'
+    logger.info("demo*****");
 }
 
-task compile {
-    doLast {
-        println 'We are doing the compile.'
+task hello{
+    description ="**Demo task description**"
+    group="Welcome***"
+
+    doFirst {
+        logger.info("******My name is: $name 1st definition");
     }
+    doLast{
+        logger.info("******My name is: $name 2nd definition");
+    }
+}
+
+
+
+
+hello.doLast{
+    logger.info("******My name is: $name 3nd definition");
+}
+
+hello.doLast{
+    logger.info("******My name is: $name 4nd definition");
+}
+
+hello.doFirst{
+    logger.info("******My name is: $name 5nd definition");
+}
+
+logger.info hello.description
+logger.info hello.group
+
+
+task hello2 {
+    description = "**Demo task description**"
+    group = "Welcome***"
+}
+
+
+hello2.doFirst{
+    logger.info("******My name is: $name 4nd definition - 1");
+}.doLast{
+    logger.info("******My name is: $name 4nd definition - 2");
+}.doLast{
+    logger.info("******My name is: $name 4nd definition - 3");
+}.doLast{
+    logger.info("******My name is: $name 4nd definition - 4");
+}.doFirst{
+    logger.info("******My name is: $name 4nd definition - 5...When does it execute?");
 }
