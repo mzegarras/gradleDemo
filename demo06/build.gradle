@@ -1,0 +1,32 @@
+defaultTasks 'doFinished'
+
+group 'net.msonic'
+version '1.0-SNAPSHOT'
+
+logger.info("-->> Build gradle-->phase configuration")
+
+task doStartProcess{
+    doLast{
+        logger.info "**doStartProcess"
+    }
+}
+
+task doStep02{
+    doLast{
+        logger.info "**step02"
+    }
+}
+
+task doSomethingInTheMidlle (dependsOn:['doStartProcess','doStep02']){
+    doLast{
+        logger.info "**doSomethingInTheMidlle"
+    }
+}
+
+task doFinished (dependsOn: ['doSomethingInTheMidlle','doStep02']){
+    doLast{
+        logger.info "**doFinished"
+    }
+}
+
+
