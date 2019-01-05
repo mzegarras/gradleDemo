@@ -17,16 +17,57 @@ task doStep02{
     }
 }
 
-task doSomethingInTheMidlle (dependsOn:['doStartProcess','doStep02']){
+/*
+task doSomethingInTheMidlle (dependsOn:['doStartProcess',project.tasks.findAll {task->task.name.startsWith("doStep02")}]){
+    doLast{
+        logger.info "**doSomethingInTheMidlle"
+    }
+}
+*/
+
+task doSomethingInTheMidlle {
     doLast{
         logger.info "**doSomethingInTheMidlle"
     }
 }
 
-task doFinished (dependsOn: ['doSomethingInTheMidlle','doStep02']){
+task doFinished (dependsOn: ['doSomethingInTheMidlle']){
+//task doFinished (dependsOn: ['doSomethingInTheMidlle','doStep02']){
     doLast{
         logger.info "**doFinished"
     }
 }
 
 
+/*
+logger.info ">>>>>>>>>>>>${project.tasks}"
+logger.info ">>>>>>>>>>>>${project.tasks.findAll {task->task.name.startsWith("doStep02")}}"
+//doSomethingInTheMidlle.dependsOn doStartProcess,doStep02
+*/
+
+def value = Math.random()
+logger.info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${value}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+if(value<=0.5){
+    doSomethingInTheMidlle.dependsOn doStartProcess,tasks.findAll {task->task.name.startsWith("doStep02")}
+}
+
+gradle.taskGraph.whenReady { taskGrap ->
+
+    if(taskGrap.hasTask(doStep02)){
+        project.version='1.0'
+    }else{
+        project.version='1.0-SNAPSHOPT'
+    }
+    logger.info "***************${project.version}"
+    logger.info "***************${project.gradle.taskGraph.allTasks}"
+
+}
+
+
+gradle.taskGraph.beforeTask {task->
+    logger.info "+++Before task ${task.name}"
+}
+
+gradle.taskGraph.afterTask {task->
+    logger.info "+++After task ${task.name}"
+}
